@@ -1,68 +1,93 @@
 package ru.moysklad.api.tests;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import ru.moysklad.api.lombok.CreateCountryRequest;
 import ru.moysklad.api.lombok.CreateCountryResponse;
 
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
 import static org.assertj.core.api.Assertions.assertThat;
+import static ru.moysklad.api.specs.CommonSpecs.CommonRequestSpec;
+import static ru.moysklad.api.specs.CommonSpecs.CommonResponseSpec;
 
 
 public class CountryTests {
+    static String IdOfCountryWithRequiredFields;
+    static String IdOfCountryWithAllFields;
     @Test
-    void CreateCountryWithRequiredFields () {
+    void createCountryWithRequiredFields () {
 
         CreateCountryRequest body = new CreateCountryRequest();
-        body.setName("Монштадт1");
+        body.setName("Монштадт");
 
 
         CreateCountryResponse response = given()
-                .log().all()
-                .contentType(JSON)
-                .header("Authorization", "Basic YWRtaW5AdmJhZ3JvdmEyOjEyMzEyMw==")
+                .spec(CommonRequestSpec)
                 .body(body)
                 .when()
-                .post("https://online.moysklad.ru/api/remap/1.2/entity/country/")
+                .post("/entity/country/")
                 .then()
-                .log().all()
-                .statusCode(200)
+                .spec(CommonResponseSpec)
                 .extract().as(CreateCountryResponse.class);
 
         assertThat(response.getId()).isNotNull();
-        assertThat(response.getName()).isEqualTo("Монштадт1");
+        assertThat(response.getName()).isEqualTo("Монштадт");
         assertThat(response.getShared()).isEqualTo(true);
 
-     //    String idOfCountryWithoutDescription = response.getId();
+        IdOfCountryWithRequiredFields = response.getId();
+
 
     }
+
     @Test
-    void CreateCountryWithAllFields () {
+    void createCountryWithAllFields () {
 
         CreateCountryRequest body = new CreateCountryRequest();
-        body.setName("Монштадт1");
+        body.setName("Монштадт");
         body.setDescription("Лучший город Тейвата");
         body.setCode("123");
         body.setExternalCode("ExtCode");
 
         CreateCountryResponse response = given()
+                .spec(CommonRequestSpec)
                 .log().uri()
-                .contentType(JSON)
-                .header("Authorization", "Basic YWRtaW5AdmJhZ3JvdmEyOjEyMzEyMw==")
                 .body(body)
                 .when()
-                .post("https://online.moysklad.ru/api/remap/1.2/entity/country/")
+                .post("/entity/country/")
                 .then()
-                .log().all()
-                .statusCode(200)
+                .spec(CommonResponseSpec)
                 .extract().as(CreateCountryResponse.class);
 
         assertThat(response.getId()).isNotNull();
-        assertThat(response.getName()).isEqualTo("Монштадт1");
+        assertThat(response.getName()).isEqualTo("Монштадт");
         assertThat(response.getShared()).isEqualTo(true);
+        assertThat(response.getDescription()).isEqualTo("Лучший город Тейвата");
+        assertThat(response.getCode()).isEqualTo("123");
+        assertThat(response.getExternalCode()).isEqualTo("ExtCode");
 
+        IdOfCountryWithAllFields = response.getId();
 
 
     }
+
+    @AfterAll
+    static void cleanAll() {
+        given()
+                .spec(CommonRequestSpec)
+                .when()
+                .delete("/entity/country/" + IdOfCountryWithRequiredFields)
+                .then()
+                .spec(CommonResponseSpec);
+
+        given()
+                .spec(CommonRequestSpec)
+                .when()
+                .delete("/entity/country/" + IdOfCountryWithAllFields)
+                .then()
+                .spec(CommonResponseSpec);
+
+    }
+
+
 }

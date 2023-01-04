@@ -1,9 +1,10 @@
 package ru.moysklad.api.tests;
 
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import ru.moysklad.api.lombok.CreateCountryRequest;
-import ru.moysklad.api.lombok.CreateCountryResponse;
+import ru.moysklad.api.lombok.SingleCountryRequest;
+import ru.moysklad.api.lombok.SingleCountryResponse;
 
 
 import static io.restassured.RestAssured.given;
@@ -12,30 +13,30 @@ import static ru.moysklad.api.specs.CommonSpecs.CommonRequestSpec;
 import static ru.moysklad.api.specs.CommonSpecs.CommonResponseSpec;
 
 
-public class CountryTests {
-    static String IdOfCountryWithRequiredFields;
-    static String IdOfCountryWithAllFields;
+public class CountryTests extends TestBase {
     @Test
     void createCountryWithRequiredFields () {
 
-        CreateCountryRequest body = new CreateCountryRequest();
+        SingleCountryRequest body = new SingleCountryRequest();
         body.setName("Монштадт");
 
 
-        CreateCountryResponse response = given()
+        SingleCountryResponse response = given()
                 .spec(CommonRequestSpec)
                 .body(body)
                 .when()
                 .post("/entity/country/")
                 .then()
                 .spec(CommonResponseSpec)
-                .extract().as(CreateCountryResponse.class);
+                .extract().as(SingleCountryResponse.class);
 
         assertThat(response.getId()).isNotNull();
         assertThat(response.getName()).isEqualTo("Монштадт");
         assertThat(response.getShared()).isEqualTo(true);
 
-        IdOfCountryWithRequiredFields = response.getId();
+        //вычищаем данные
+        String CountryId = response.getId();
+        deleteCountry(CountryId);
 
 
     }
@@ -43,21 +44,20 @@ public class CountryTests {
     @Test
     void createCountryWithAllFields () {
 
-        CreateCountryRequest body = new CreateCountryRequest();
+        SingleCountryRequest body = new SingleCountryRequest();
         body.setName("Монштадт");
         body.setDescription("Лучший город Тейвата");
         body.setCode("123");
         body.setExternalCode("ExtCode");
 
-        CreateCountryResponse response = given()
+        SingleCountryResponse response = given()
                 .spec(CommonRequestSpec)
-                .log().uri()
                 .body(body)
                 .when()
                 .post("/entity/country/")
                 .then()
                 .spec(CommonResponseSpec)
-                .extract().as(CreateCountryResponse.class);
+                .extract().as(SingleCountryResponse.class);
 
         assertThat(response.getId()).isNotNull();
         assertThat(response.getName()).isEqualTo("Монштадт");
@@ -66,26 +66,46 @@ public class CountryTests {
         assertThat(response.getCode()).isEqualTo("123");
         assertThat(response.getExternalCode()).isEqualTo("ExtCode");
 
-        IdOfCountryWithAllFields = response.getId();
+        //вычищаем данные
+        String CountryId = response.getId();
+        deleteCountry(CountryId);
 
 
     }
 
-    @AfterAll
-    static void cleanAll() {
-        given()
-                .spec(CommonRequestSpec)
-                .when()
-                .delete("/entity/country/" + IdOfCountryWithRequiredFields)
-                .then()
-                .spec(CommonResponseSpec);
+    @Test
+    void editCountry(){
+        SingleCountryRequest CreateCountryBody = new SingleCountryRequest();
+        CreateCountryBody.setName("Снежная");
+        CreateCountryBody.setDescription("Там очень холодно");
 
-        given()
+        SingleCountryResponse CreateCountryResponse = given()
                 .spec(CommonRequestSpec)
+                .body(CreateCountryBody)
                 .when()
-                .delete("/entity/country/" + IdOfCountryWithAllFields)
+                .post("/entity/country/")
                 .then()
-                .spec(CommonResponseSpec);
+                .spec(CommonResponseSpec)
+                .extract().as(SingleCountryResponse.class);
+
+        String CountryId = CreateCountryResponse.getId();
+
+        SingleCountryRequest EditCountryBody = new SingleCountryRequest();
+        EditCountryBody.setDescription("Там ОЧЕНЬ-ОЧЕНЬ холодно");
+
+        SingleCountryResponse EditCountryResponse = given()
+                .spec(CommonRequestSpec)
+                .body(EditCountryBody)
+                .when()
+                .put("/entity/country/" + CountryId)
+                .then()
+                .spec(CommonResponseSpec)
+               .extract().as(SingleCountryResponse.class);
+
+        assertThat(EditCountryResponse.getDescription()).isEqualTo("Там ОЧЕНЬ-ОЧЕНЬ холодно");
+
+        //вычищаем данные
+        deleteCountry(CountryId);
 
     }
 

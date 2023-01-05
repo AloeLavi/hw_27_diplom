@@ -24,19 +24,24 @@ public class UiTestBase {
         Configuration.browserCapabilities = capabilities;
 
         Configuration.baseUrl = "https://online.moysklad.ru";
-        Configuration.browserSize = "1440x1080";
 
-        String browser = System.getProperty("browser", "chrome");
+
+        /*
+        Configuration.browserSize = "1440x1080";
+     String browser = System.getProperty("browser", "chrome");
         String browserVersion = System.getProperty("browserVersion", "100");
         String browserSize = System.getProperty("browserSize",  "1600x800");
-   String remote = System.getProperty("remote",  "https://user1:1234@selenoid.autotests.cloud/wd/hub");
+        String remote = System.getProperty("remote",  "https://user1:1234@selenoid.autotests.cloud/wd/hub");
 
 
         Configuration.browser= browser;
         Configuration.browserVersion= browserVersion;
         Configuration.browserSize = browserSize;
         //    Configuration.holdBrowserOpen = true;
-     Configuration.remote = remote;
+     Configuration.remote = remote; */
+        Configuration.browserSize = "1600x800";
+        Configuration.holdBrowserOpen = true;
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
     }
 

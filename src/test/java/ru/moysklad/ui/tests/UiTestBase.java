@@ -36,7 +36,7 @@ public class UiTestBase {
         Configuration.browserVersion= browserVersion;
         Configuration.browserSize = browserSize;
         //    Configuration.holdBrowserOpen = true;
-     //   Configuration.remote = remote;
+     Configuration.remote = remote;
 
     }
 

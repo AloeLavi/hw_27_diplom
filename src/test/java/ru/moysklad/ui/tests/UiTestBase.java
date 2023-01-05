@@ -37,8 +37,7 @@ public class UiTestBase {
         Configuration.browserVersion= browserVersion;
         Configuration.browserSize = browserSize;
         Configuration.remote = remote;
-        Configuration.holdBrowserOpen = true;
-       // Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.holdBrowserOpen = false;
 
     }
 

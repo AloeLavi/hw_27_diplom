@@ -1,9 +1,11 @@
-package ru.moysklad.ui.tests;
+package ru.moysklad.browser.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import config.BrowserConfig;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,9 +17,11 @@ import static com.codeborne.selenide.Selenide.open;
 public class UiTestBase {
 
     @BeforeAll
-    static void configure() {
+
+    public static void configure() {
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
@@ -40,11 +44,15 @@ public class UiTestBase {
 
     }
 
+
+
     @BeforeEach
     void logIn(){
+
+        BrowserConfig config = ConfigFactory.create(BrowserConfig.class, System.getProperties());
         open("/");
-        $("#lable-login").setValue("admin@vbagrova2");
-        $("#lable-password").setValue("123123");
+        $("#lable-login").setValue(config.user());
+        $("#lable-password").setValue(config.password());
         $("#submitButton").click();
     }
 

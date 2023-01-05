@@ -1,9 +1,9 @@
-package ru.moysklad.ui.tests;
+package ru.moysklad.browser.tests;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.moysklad.ui.pages.*;
+import ru.moysklad.browser.pages.*;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.byText;

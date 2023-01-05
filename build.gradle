@@ -40,7 +40,9 @@ dependencies {
             "org.assertj:assertj-core:$assertJVersion",
             "io.qameta.allure:allure-rest-assured:$allureVersion",
             "com.fasterxml.jackson.core:jackson-databind:2.14.1",
-            'org.projectlombok:lombok:1.18.22'
+            'org.projectlombok:lombok:1.18.22',
+            'org.aeonbits.owner:owner:1.0.4'
+
 
 
 

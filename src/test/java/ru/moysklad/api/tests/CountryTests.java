@@ -1,11 +1,8 @@
 package ru.moysklad.api.tests;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.moysklad.api.lombok.SingleCountryRequest;
 import ru.moysklad.api.lombok.SingleCountryResponse;
-
-
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static ru.moysklad.api.specs.CommonSpecs.CommonRequestSpec;
@@ -19,7 +16,6 @@ public class CountryTests extends ApiTestBase {
 
         SingleCountryRequest body = new SingleCountryRequest();
         body.setName("Монштадт");
-
 
         SingleCountryResponse response = given()
                 .spec(CommonRequestSpec)
@@ -37,7 +33,6 @@ public class CountryTests extends ApiTestBase {
         //вычищаем данные
         String CountryId = response.getId();
         deleteCountry(CountryId);
-
 
     }
 
@@ -90,7 +85,7 @@ public class CountryTests extends ApiTestBase {
                 .spec(CommonResponseSpec)
                 .extract().as(SingleCountryResponse.class);
 
-        String CountryId = CreateCountryResponse.getId();
+        String CountryId = CreateCountryResponse.getId(); // получаем ID для запроса на редактирование
 
         SingleCountryRequest EditCountryBody = new SingleCountryRequest();
         EditCountryBody.setDescription("Там ОЧЕНЬ-ОЧЕНЬ холодно");

@@ -5,7 +5,7 @@ import org.aeonbits.owner.Config;
 
 
 @Config.Sources({
-        "classpath:browser.properties"
+        "classpath:properties/browser.properties"
 
 })
 

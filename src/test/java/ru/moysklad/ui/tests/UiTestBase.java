@@ -28,13 +28,15 @@ public class UiTestBase {
         String browserName = System.getProperty("browser", "chrome");
         String browserVersion = System.getProperty("browserVersion", "100");
         String browserSize = System.getProperty("browserSize",  "1600x800");
-        String remote = System.getProperty("remote",  "https://user1:1234@selenoid.autotests.cloud/wd/hub");
+        String remoteUrl = System.getProperty("remote",  "https://user1:1234@selenoid.autotests.cloud/wd/hub");
 
         Configuration.browser= browserName;
         Configuration.browserVersion= browserVersion;
         Configuration.browserSize = browserSize;
-        Configuration.remote = remote;
         Configuration.holdBrowserOpen = false;
+        if(remoteUrl!= null ){
+            Configuration.remote = remoteUrl;
+        }
 
     }
 

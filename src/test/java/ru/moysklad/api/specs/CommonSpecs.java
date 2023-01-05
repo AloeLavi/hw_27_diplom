@@ -1,8 +1,6 @@
 package ru.moysklad.api.specs;
 
 import config.ApiConfig;
-import helpers.CustomApiListener;
-import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
@@ -17,14 +15,14 @@ public class CommonSpecs {
 
     public static ApiConfig config = ConfigFactory.create(ApiConfig.class, System.getProperties());
 
-    public static RequestSpecification CommonRequestSpec = with()
+    public static RequestSpecification commonRequestSpec = with()
             .filter(withCustomTemplates())
             .baseUri("https://online.moysklad.ru/api/remap/1.2")
             .log().all()
             .contentType(JSON)
             .header("Authorization", config.token());
 
-    public static ResponseSpecification CommonResponseSpec = new ResponseSpecBuilder()
+    public static ResponseSpecification commonResponseSpec = new ResponseSpecBuilder()
             .log(STATUS)
             .log(BODY)
             .build().statusCode(200);

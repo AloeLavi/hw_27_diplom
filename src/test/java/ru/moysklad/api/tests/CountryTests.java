@@ -38,7 +38,7 @@ public class CountryTests extends ApiTestBase {
 
     @Test
     @DisplayName("Создание страны с параметрами Name, Description, Code, ExternalCode")
-    void createCountryWithAllFields () {
+    void CreateCountryWithAllFields () {
 
         SingleCountryRequest body = new SingleCountryRequest();
         body.setName(countryName);
@@ -67,6 +67,20 @@ public class CountryTests extends ApiTestBase {
         deleteCountry(CountryId);
 
 
+    }
+
+    @Test
+    @DisplayName("Создание страны без обязательных полей")
+    void CreateCountryWithoutRequiredFields(){
+        SingleCountryRequest body = new SingleCountryRequest();
+        given()
+                .spec(commonRequestSpec)
+                .body(body)
+                .when()
+                .post("/entity/country/")
+                .then()
+                .log().all()
+                .statusCode(412);
     }
 
     @Test

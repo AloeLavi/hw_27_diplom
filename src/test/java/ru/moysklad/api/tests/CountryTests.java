@@ -1,5 +1,6 @@
 package ru.moysklad.api.tests;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.moysklad.api.lombok.SingleCountryRequest;
 import ru.moysklad.api.lombok.SingleCountryResponse;
@@ -13,6 +14,7 @@ import static ru.moysklad.api.specs.CommonSpecs.CommonResponseSpec;
 
 public class CountryTests extends ApiTestBase {
     @Test
+    @DisplayName("Создание страны с параметром Name")
     void createCountryWithRequiredFields () {
 
         SingleCountryRequest body = new SingleCountryRequest();
@@ -40,6 +42,7 @@ public class CountryTests extends ApiTestBase {
     }
 
     @Test
+    @DisplayName("Создание страны с параметрами Name, Description, Code, ExternalCode")
     void createCountryWithAllFields () {
 
         SingleCountryRequest body = new SingleCountryRequest();
@@ -72,6 +75,7 @@ public class CountryTests extends ApiTestBase {
     }
 
     @Test
+    @DisplayName("Редактирование страны")
     void editCountry(){
         SingleCountryRequest CreateCountryBody = new SingleCountryRequest();
         CreateCountryBody.setName("Снежная");

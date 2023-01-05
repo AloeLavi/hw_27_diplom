@@ -1,8 +1,6 @@
 package ru.moysklad.ui.tests;
 
-import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.moysklad.ui.pages.*;
@@ -13,7 +11,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 
-public class PurchaseOrderTests extends TestBase {
+public class PurchaseOrderTests extends UiTestBase {
     PurchaseOrderList purchaseOrderList = new PurchaseOrderList();
     PurchaseOrderPage purchaseOrderPage = new PurchaseOrderPage();
     HeaderPage header = new HeaderPage();

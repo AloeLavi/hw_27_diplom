@@ -12,7 +12,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class TestBase {
+public class UiTestBase {
 
     @BeforeAll
     static void configure() {
@@ -29,7 +29,7 @@ public class TestBase {
         String browserName = System.getProperty("browser", "chrome");
         String browserVersion = System.getProperty("browserVersion", "100");
         String browserSize = System.getProperty("browserSize",  "1600x800");
-   //     String remote = System.getProperty("remote",  "https://user1:1234@selenoid.autotests.cloud/wd/hub");
+   String remote = System.getProperty("remote",  "https://user1:1234@selenoid.autotests.cloud/wd/hub");
 
 
         Configuration.browser= browserName;

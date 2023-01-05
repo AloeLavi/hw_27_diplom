@@ -4,7 +4,7 @@ import static io.restassured.RestAssured.given;
 import static ru.moysklad.api.specs.CommonSpecs.CommonRequestSpec;
 import static ru.moysklad.api.specs.CommonSpecs.CommonResponseSpec;
 
-public class TestBase {
+public class ApiTestBase {
     public void deleteCountry(String id){
         given()
                 .spec(CommonRequestSpec)

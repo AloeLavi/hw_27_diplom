@@ -1,7 +1,5 @@
 package ru.moysklad.api.tests;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import ru.moysklad.api.lombok.SingleCountryRequest;
 import ru.moysklad.api.lombok.SingleCountryResponse;
@@ -13,7 +11,7 @@ import static ru.moysklad.api.specs.CommonSpecs.CommonRequestSpec;
 import static ru.moysklad.api.specs.CommonSpecs.CommonResponseSpec;
 
 
-public class CountryTests extends TestBase {
+public class CountryTests extends ApiTestBase {
     @Test
     void createCountryWithRequiredFields () {
 

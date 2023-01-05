@@ -14,7 +14,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class UiTestBase {
+public class BrowserTestBase {
 
     @BeforeAll
 
@@ -40,7 +40,7 @@ public class UiTestBase {
         Configuration.holdBrowserOpen = false;
         if(remoteUrl!= null ){
             Configuration.remote = remoteUrl;
-        }
+       }
 
     }
 

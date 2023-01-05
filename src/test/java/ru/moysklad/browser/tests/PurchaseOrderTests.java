@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 
-public class PurchaseOrderTests extends UiTestBase {
+public class PurchaseOrderTests extends BrowserTestBase {
     PurchaseOrderList purchaseOrderList = new PurchaseOrderList();
     PurchaseOrderPage purchaseOrderPage = new PurchaseOrderPage();
     HeaderPage header = new HeaderPage();

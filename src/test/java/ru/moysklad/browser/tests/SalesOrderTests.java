@@ -37,8 +37,9 @@ public class SalesOrderTests extends BrowserTestBase {
         });
 
         step("Cохранить документ", () -> {
-            salesOrderPage.saveDocument()
-                        .checkDialogMiddleCenter("Заказ создан");
+            salesOrderPage.saveDocument();
+            sleep(2000);
+            salesOrderPage.checkDialogMiddleCenter("Заказ создан");
         });
         step("Закрыть документ", () -> {
         salesOrderPage.closeDocument();
@@ -48,6 +49,7 @@ public class SalesOrderTests extends BrowserTestBase {
         salesOrderList.checkDocumentExistanceByNumber("00001");
         });
     }
+
     @DisplayName("Попытка создания заказа покупателя без обязательных полей")
     @Test
     void createSalesOrderWithoutRequiredFields() {
@@ -93,8 +95,10 @@ public class SalesOrderTests extends BrowserTestBase {
                 .checkDialogMiddleCenter("Заказ создан");
     });
     step("Нажать Изменить -> Копировать", () -> {
-        salesOrderPage.copyDocument()
-                .checkDialogMiddleCenter("Заказ скопирован");
+        salesOrderPage.copyDocument();
+        sleep(2000);
+
+        salesOrderPage.checkDialogMiddleCenter("Заказ скопирован");
     });
     step("В реестре проверить наличие Заказов покупателя 00001, 00002", () -> {
         salesOrderList.openList();

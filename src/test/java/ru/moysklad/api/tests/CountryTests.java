@@ -38,7 +38,7 @@ public class CountryTests extends ApiTestBase {
 
     @Test
     @DisplayName("Создание страны с параметрами Name, Description, Code, ExternalCode")
-    void CreateCountryWithAllFields () {
+    void createCountryWithAllFields() {
 
         SingleCountryRequest body = new SingleCountryRequest();
         body.setName(countryName);
@@ -63,15 +63,15 @@ public class CountryTests extends ApiTestBase {
         assertThat(response.getExternalCode()).isEqualTo(countryExtCode);
 
         //вычищаем данные
-        String CountryId = response.getId();
-        deleteCountry(CountryId);
+        String countryId = response.getId();
+        deleteCountry(countryId);
 
 
     }
 
     @Test
     @DisplayName("Создание страны без обязательных полей")
-    void CreateCountryWithoutRequiredFields(){
+    void createCountryWithoutRequiredFields(){
         SingleCountryRequest body = new SingleCountryRequest();
         given()
                 .spec(commonRequestSpec)
@@ -86,34 +86,34 @@ public class CountryTests extends ApiTestBase {
     @Test
     @DisplayName("Редактирование страны")
     void editCountry(){
-        SingleCountryRequest CreateCountryBody = new SingleCountryRequest();
-        CreateCountryBody.setName(countryName);
-        CreateCountryBody.setDescription(countryDescription);
+        SingleCountryRequest createCountryBody = new SingleCountryRequest();
+        createCountryBody.setName(countryName);
+        createCountryBody.setDescription(countryDescription);
 
-        SingleCountryResponse CreateCountryResponse = given()
+        SingleCountryResponse createCountryResponse = given()
                 .spec(commonRequestSpec)
-                .body(CreateCountryBody)
+                .body(createCountryBody)
                 .when()
                 .post("/entity/country/")
                 .then()
                 .spec(commonResponseSpec)
                 .extract().as(SingleCountryResponse.class);
 
-        String CountryId = CreateCountryResponse.getId(); // получаем ID для запроса на редактирование
+        String CountryId = createCountryResponse.getId(); // получаем ID для запроса на редактирование
 
-        SingleCountryRequest EditCountryBody = new SingleCountryRequest();
-        EditCountryBody.setDescription(countryDescription2);
+        SingleCountryRequest editCountryBody = new SingleCountryRequest();
+        editCountryBody.setDescription(countryDescription2);
 
-        SingleCountryResponse EditCountryResponse = given()
+        SingleCountryResponse editCountryResponse = given()
                 .spec(commonRequestSpec)
-                .body(EditCountryBody)
+                .body(editCountryBody)
                 .when()
                 .put("/entity/country/" + CountryId)
                 .then()
                 .spec(commonResponseSpec)
                .extract().as(SingleCountryResponse.class);
 
-        assertThat(EditCountryResponse.getDescription()).isEqualTo(countryDescription2);
+        assertThat(editCountryResponse.getDescription()).isEqualTo(countryDescription2);
 
         //вычищаем данные
         deleteCountry(CountryId);

@@ -39,7 +39,7 @@ public class BrowserTestBase {
         Configuration.browserSize = browserSize;
         Configuration.holdBrowserOpen = false;
         if(remoteUrl!= null ){
-            Configuration.remote = remoteUrl;
+           Configuration.remote = remoteUrl;
        }
 
     }

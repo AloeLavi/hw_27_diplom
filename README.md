@@ -91,7 +91,7 @@ test
 <img title="allure_test" src="images/pictures/allure test.png">
 </p>
 
-## <img src="images/logo/telegram.png" width="25" height="25"  alt="Telegram"/></a> Уведомления в Telegram с использованием бота
+## <img src="images/logo/telegram.png" width="20" height="20"  alt="Telegram"/></a> Уведомления в Telegram с использованием бота
 
 <p align="center">
 <img title="Telegram Notifications" src="images/pictures/telegram.png">

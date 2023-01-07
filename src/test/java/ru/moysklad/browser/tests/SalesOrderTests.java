@@ -65,8 +65,9 @@ public class SalesOrderTests extends BrowserTestBase {
             salesOrderPage.setCounterparty("ООО \"Покупатель\"");
         });
         step("Cохранить документ", () -> {
-            salesOrderPage.saveDocument()
-                    .checkDialogMiddleCenter("Заказ создан");
+            salesOrderPage.saveDocument();
+            sleep(2000);
+            salesOrderPage.checkDialogMiddleCenter("Заказ создан");
         });
         step("В реестре проверить наличие Заказа поставщику 00001", () -> {
             salesOrderPage.closeDocument();

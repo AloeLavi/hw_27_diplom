@@ -1,0 +1,16 @@
+{
+  "base": {
+    "project": "15-aloe_lavi-hw_15_quick_project",
+    "environment": "qa.guru",
+    "comment": "@aloe_lavi, your tests finally did it",
+    "reportLink": "https://jenkins.autotests.cloud/job/15-aloe_lavi-hw_15_quick_project/15/",
+    "language": "en",
+    "allureFolder": "allure-report/",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "5640709553:AAHQmb0KcMcqrA_nZSo-rJxlcWQeF0aZvGs",
+    "chat": "-1001887565748",
+    "replyTo": ""
+  }
+}

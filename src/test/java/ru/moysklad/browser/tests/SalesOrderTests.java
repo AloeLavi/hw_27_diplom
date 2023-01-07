@@ -38,6 +38,8 @@ public class SalesOrderTests extends BrowserTestBase {
         });
 
         step("Cохранить документ", () -> {
+            sleep(4000);
+
             salesOrderPage.saveDocument();
             sleep(4000);
             salesOrderPage.checkDialogMiddleCenter("Заказ создан");
@@ -67,8 +69,10 @@ public class SalesOrderTests extends BrowserTestBase {
             salesOrderPage.setCounterparty("ООО \"Покупатель\"");
         });
         step("Cохранить документ", () -> {
+            sleep(4000);
             salesOrderPage.saveDocument();
             sleep(4000);
+
             salesOrderPage.checkDialogMiddleCenter("Заказ создан");
         });
         step("В реестре проверить наличие Заказа поставщику 00001", () -> {
@@ -95,6 +99,8 @@ public class SalesOrderTests extends BrowserTestBase {
                 .checkDialogMiddleCenter("Заказ создан");
     });
     step("Нажать Изменить -> Копировать", () -> {
+        sleep(4000);
+
         salesOrderPage.copyDocument();
         sleep(4000);
         salesOrderPage.checkDialogMiddleCenter("Заказ скопирован");

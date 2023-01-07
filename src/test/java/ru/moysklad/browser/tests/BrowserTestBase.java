@@ -12,8 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class BrowserTestBase {
 
@@ -43,14 +42,16 @@ public class BrowserTestBase {
     //       Configuration.remote = remoteUrl;
     //   }
 
-    }
+        }
+
+
 
 
 
     @BeforeEach
     void logIn(){
         BrowserConfig config = ConfigFactory.create(BrowserConfig.class, System.getProperties());
-        open();
+        open("/");
         $("#lable-login").setValue(config.user());
         $("#lable-password").setValue(config.password());
         $("#submitButton").click();
@@ -62,8 +63,6 @@ public class BrowserTestBase {
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
-        Selenide.clearBrowserLocalStorage();
-        Selenide.closeWebDriver();
     }
 
 

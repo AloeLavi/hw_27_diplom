@@ -10,7 +10,6 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
-import static io.restassured.RestAssured.given;
 
 public class PurchaseOrderTests extends BrowserTestBase {
     PurchaseOrderList purchaseOrderList = new PurchaseOrderList();
@@ -100,13 +99,15 @@ public class PurchaseOrderTests extends BrowserTestBase {
 
     }
 
+
+
     @AfterEach
     void cleanAll(){
         step("Удалить все заказы поставщику", () -> {
             purchaseOrderList.openList();
             purchaseOrderList.DeleteAllDocuments();
             header.exit();
-            Selenide.closeWebDriver();
+            Selenide.clearBrowserLocalStorage();
         });
 
     }

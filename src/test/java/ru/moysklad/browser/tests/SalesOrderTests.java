@@ -107,7 +107,6 @@ public class SalesOrderTests extends BrowserTestBase {
     @AfterEach
     void cleanData(){
         salesOrderList.openList();
-        header.clickOnHelp();
         salesOrderList.DeleteAllDocuments();
         header.exit();
 

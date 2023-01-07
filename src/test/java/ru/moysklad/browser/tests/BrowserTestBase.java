@@ -1,6 +1,7 @@
 package ru.moysklad.browser.tests;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import config.BrowserConfig;
 import helpers.Attach;
@@ -48,9 +49,8 @@ public class BrowserTestBase {
 
     @BeforeEach
     void logIn(){
-
         BrowserConfig config = ConfigFactory.create(BrowserConfig.class, System.getProperties());
-        open("/");
+        open();
         $("#lable-login").setValue(config.user());
         $("#lable-password").setValue(config.password());
         $("#submitButton").click();
@@ -62,6 +62,8 @@ public class BrowserTestBase {
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
+        Selenide.clearBrowserLocalStorage();
+        Selenide.closeWebDriver();
     }
 
 

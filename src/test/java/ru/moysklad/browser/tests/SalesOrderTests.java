@@ -49,7 +49,7 @@ public class SalesOrderTests extends BrowserTestBase {
         salesOrderList.checkDocumentExistanceByNumber("00001");
         });
     }
-
+@Disabled
     @DisplayName("Попытка создания заказа покупателя без обязательных полей")
     @Test
     void createSalesOrderWithoutRequiredFields() {

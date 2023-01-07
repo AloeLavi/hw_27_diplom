@@ -39,7 +39,6 @@ public class SalesOrderTests extends BrowserTestBase {
 
         step("Cохранить документ", () -> {
             sleep(4000);
-
             salesOrderPage.saveDocument();
             sleep(4000);
             salesOrderPage.checkDialogMiddleCenter("Заказ создан");
@@ -95,12 +94,14 @@ public class SalesOrderTests extends BrowserTestBase {
         salesOrderPage.setCounterparty("ООО \"Покупатель\"");
     });
     step("Cохранить документ", () -> {
-        salesOrderPage.saveDocument()
-                .checkDialogMiddleCenter("Заказ создан");
+        sleep(4000);
+        salesOrderPage.saveDocument();
+        sleep(4000);
+
+        salesOrderPage.checkDialogMiddleCenter("Заказ создан");
     });
     step("Нажать Изменить -> Копировать", () -> {
         sleep(4000);
-
         salesOrderPage.copyDocument();
         sleep(4000);
         salesOrderPage.checkDialogMiddleCenter("Заказ скопирован");

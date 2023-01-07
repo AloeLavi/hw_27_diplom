@@ -116,7 +116,5 @@ public class SalesOrderTests extends BrowserTestBase {
         salesOrderList.openList();
         salesOrderList.DeleteAllDocuments();
         header.exit();
-        Selenide.clearBrowserLocalStorage();
-
     }
 }

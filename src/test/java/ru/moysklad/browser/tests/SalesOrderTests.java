@@ -1,5 +1,6 @@
 package ru.moysklad.browser.tests;
 
+import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -49,7 +50,6 @@ public class SalesOrderTests extends BrowserTestBase {
         salesOrderList.checkDocumentExistanceByNumber("00001");
         });
     }
-@Disabled
     @DisplayName("Попытка создания заказа покупателя без обязательных полей")
     @Test
     void createSalesOrderWithoutRequiredFields() {
@@ -113,6 +113,6 @@ public class SalesOrderTests extends BrowserTestBase {
         salesOrderList.openList();
         salesOrderList.DeleteAllDocuments();
         header.exit();
-
+        Selenide.closeWebDriver();
     }
 }

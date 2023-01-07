@@ -1,5 +1,6 @@
 package ru.moysklad.browser.tests;
 
+import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -105,6 +106,7 @@ public class PurchaseOrderTests extends BrowserTestBase {
             purchaseOrderList.openList();
             purchaseOrderList.DeleteAllDocuments();
             header.exit();
+            Selenide.closeWebDriver();
         });
 
     }

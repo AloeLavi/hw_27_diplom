@@ -78,6 +78,33 @@ public class SalesOrderTests extends BrowserTestBase {
     }
 
 
+@DisplayName("Копирование заказа покупателя")
+    @Test
+    void copySalesOrder(){
+    step("Открыть реестр Заказов покупателя", () -> {
+        salesOrderList.openList();
+    });
+    step("Нажать +Заказ", () -> {
+        salesOrderList.openNew();
+    });
+    step("Заполнить покупателя", () -> {
+        salesOrderPage.setCounterparty("ООО \"Покупатель\"");
+    });
+    step("Cохранить документ", () -> {
+        salesOrderPage.saveDocument()
+                .checkDialogMiddleCenter("Заказ создан");
+    });
+    step("Нажать Изменить -> Копировать", () -> {
+        salesOrderPage.copyDocument();
+        sleep(4000);
+        salesOrderPage.checkDialogMiddleCenter("Заказ скопирован");
+    });
+    step("В реестре проверить наличие Заказов покупателя 00001, 00002", () -> {
+        salesOrderList.openList();
+        salesOrderList.checkDocumentExistanceByNumber("00001");
+        salesOrderList.checkDocumentExistanceByNumber("00002");
+    });
+    }
 
 
     @AfterEach
@@ -85,6 +112,7 @@ public class SalesOrderTests extends BrowserTestBase {
         salesOrderList.openList();
         salesOrderList.DeleteAllDocuments();
         header.exit();
+        Selenide.clearBrowserLocalStorage();
 
     }
 }

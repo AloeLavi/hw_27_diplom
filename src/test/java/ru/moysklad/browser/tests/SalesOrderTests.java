@@ -21,8 +21,6 @@ public class SalesOrderTests extends BrowserTestBase {
     SalesOrderList salesOrderList = new SalesOrderList();
     HeaderPage header = new HeaderPage();
 
-
-
     @Test
     @DisplayName("Создание заказа покупателя с заполненными обязательными полями")
     void createSalesOrderWithRequiredFields(){
@@ -51,6 +49,7 @@ public class SalesOrderTests extends BrowserTestBase {
         salesOrderList.checkDocumentExistanceByNumber("00001");
         });
     }
+
     @DisplayName("Попытка создания заказа покупателя без обязательных полей")
     @Test
     void createSalesOrderWithoutRequiredFields() {
@@ -80,39 +79,37 @@ public class SalesOrderTests extends BrowserTestBase {
         });
     }
 
+    @DisplayName("Копирование заказа покупателя")
+        @Test
+        void copySalesOrder(){
+        step("Открыть реестр Заказов покупателя", () -> {
+            salesOrderList.openList();
+        });
+        step("Нажать +Заказ", () -> {
+            salesOrderList.openNew();
+        });
+        step("Заполнить покупателя", () -> {
+            salesOrderPage.setCounterparty("ООО \"Покупатель\"");
+        });
+        step("Cохранить документ", () -> {
+            sleep(4000);
+            salesOrderPage.saveDocument();
+            sleep(4000);
 
-@DisplayName("Копирование заказа покупателя")
-    @Test
-    void copySalesOrder(){
-    step("Открыть реестр Заказов покупателя", () -> {
-        salesOrderList.openList();
-    });
-    step("Нажать +Заказ", () -> {
-        salesOrderList.openNew();
-    });
-    step("Заполнить покупателя", () -> {
-        salesOrderPage.setCounterparty("ООО \"Покупатель\"");
-    });
-    step("Cохранить документ", () -> {
-        sleep(4000);
-        salesOrderPage.saveDocument();
-        sleep(4000);
-
-        salesOrderPage.checkDialogMiddleCenter("Заказ создан");
-    });
-    step("Нажать Изменить -> Копировать", () -> {
-        sleep(4000);
-        salesOrderPage.copyDocument();
-        sleep(4000);
-        salesOrderPage.checkDialogMiddleCenter("Заказ скопирован");
-    });
-    step("В реестре проверить наличие Заказов покупателя 00001, 00002", () -> {
-        salesOrderList.openList();
-        salesOrderList.checkDocumentExistanceByNumber("00001");
-        salesOrderList.checkDocumentExistanceByNumber("00002");
-    });
-    }
-
+            salesOrderPage.checkDialogMiddleCenter("Заказ создан");
+        });
+        step("Нажать Изменить -> Копировать", () -> {
+            sleep(4000);
+            salesOrderPage.copyDocument();
+            sleep(4000);
+            salesOrderPage.checkDialogMiddleCenter("Заказ скопирован");
+        });
+        step("В реестре проверить наличие Заказов покупателя 00001, 00002", () -> {
+            salesOrderList.openList();
+            salesOrderList.checkDocumentExistanceByNumber("00001");
+            salesOrderList.checkDocumentExistanceByNumber("00002");
+        });
+        }
 
     @AfterEach
     void cleanData(){

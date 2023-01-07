@@ -15,6 +15,7 @@ public class PurchaseOrderTests extends BrowserTestBase {
     PurchaseOrderList purchaseOrderList = new PurchaseOrderList();
     PurchaseOrderPage purchaseOrderPage = new PurchaseOrderPage();
     HeaderPage header = new HeaderPage();
+
     @Test
     @DisplayName("Создание заказа поставщику с заполненными обязательными полями")
     void createPurchaseOrderWithRequiredFields(){
@@ -38,10 +39,7 @@ public class PurchaseOrderTests extends BrowserTestBase {
         step("В реестре проверить наличие Заказа поставщику 00001", () -> {
             purchaseOrderList.checkDocumentExistanceByNumber("00001");
         });
-
     }
-
-
 
     @DisplayName("Копирование заказа поставщику")
     @Test
@@ -95,42 +93,7 @@ public class PurchaseOrderTests extends BrowserTestBase {
         step("В реестре проверить наличие Заказа поставщику 00001", () -> {
             purchaseOrderPage.closeDocument();
             purchaseOrderList.checkDocumentExistanceByNumber("00001");        });
-
-
     }
-
-
-    SalesOrderPage salesOrderPage = new SalesOrderPage();
-    SalesOrderList salesOrderList = new SalesOrderList();
-    @DisplayName("Копирование заказа покупателя")
-    @Test
-    void copySalesOrder(){
-        step("Открыть реестр Заказов покупателя", () -> {
-            salesOrderList.openList();
-        });
-        step("Нажать +Заказ", () -> {
-            salesOrderList.openNew();
-        });
-        step("Заполнить покупателя", () -> {
-            salesOrderPage.setCounterparty("ООО \"Покупатель\"");
-        });
-        step("Cохранить документ", () -> {
-            salesOrderPage.saveDocument()
-                    .checkDialogMiddleCenter("Заказ создан");
-        });
-        step("Нажать Изменить -> Копировать", () -> {
-            salesOrderPage.copyDocument();
-            sleep(4000);
-            salesOrderPage.checkDialogMiddleCenter("Заказ скопирован");
-        });
-        step("В реестре проверить наличие Заказов покупателя 00001, 00002", () -> {
-            salesOrderList.openList();
-            salesOrderList.checkDocumentExistanceByNumber("00001");
-            salesOrderList.checkDocumentExistanceByNumber("00002");
-        });
-    }
-
-
 
     @AfterEach
     void cleanAll(){

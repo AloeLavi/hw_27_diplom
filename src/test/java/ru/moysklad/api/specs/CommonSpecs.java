@@ -27,8 +27,5 @@ public class CommonSpecs {
             .log(BODY)
             .build().statusCode(200);
 
-    public static ResponseSpecification commonFailedResponseSpec = new ResponseSpecBuilder()
-            .log(STATUS)
-            .log(BODY)
-            .build();
+
 }

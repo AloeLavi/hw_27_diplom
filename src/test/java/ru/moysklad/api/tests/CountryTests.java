@@ -31,8 +31,8 @@ public class CountryTests extends ApiTestBase {
         assertThat(response.getShared()).isEqualTo(true);
 
         //вычищаем данные
-        String CountryId = response.getId();
-        deleteCountry(CountryId);
+        String countryId = response.getId();
+        deleteCountry(countryId);
 
     }
 
@@ -70,7 +70,7 @@ public class CountryTests extends ApiTestBase {
     }
 
     @Test
-    @DisplayName("Создание страны без обязательных полей")
+    @DisplayName("Попытка создания страны без обязательных полей")
     void createCountryWithoutRequiredFields(){
         SingleCountryRequest body = new SingleCountryRequest();
         given()
@@ -86,6 +86,8 @@ public class CountryTests extends ApiTestBase {
     @Test
     @DisplayName("Редактирование страны")
     void editCountry(){
+
+        //создаем страну
         SingleCountryRequest createCountryBody = new SingleCountryRequest();
         createCountryBody.setName(countryName);
         createCountryBody.setDescription(countryDescription);
@@ -99,7 +101,7 @@ public class CountryTests extends ApiTestBase {
                 .spec(commonResponseSpec)
                 .extract().as(SingleCountryResponse.class);
 
-        String CountryId = createCountryResponse.getId(); // получаем ID для запроса на редактирование
+        String countryId = createCountryResponse.getId(); // получаем ID для запроса на редактирование
 
         SingleCountryRequest editCountryBody = new SingleCountryRequest();
         editCountryBody.setDescription(countryDescription2);
@@ -108,7 +110,7 @@ public class CountryTests extends ApiTestBase {
                 .spec(commonRequestSpec)
                 .body(editCountryBody)
                 .when()
-                .put("/entity/country/" + CountryId)
+                .put("/entity/country/" + countryId)
                 .then()
                 .spec(commonResponseSpec)
                .extract().as(SingleCountryResponse.class);
@@ -116,9 +118,47 @@ public class CountryTests extends ApiTestBase {
         assertThat(editCountryResponse.getDescription()).isEqualTo(countryDescription2);
 
         //вычищаем данные
-        deleteCountry(CountryId);
+        deleteCountry(countryId);
 
     }
 
+    @Test
+    @DisplayName("Получение страны по ID")
+    void getCountry(){
+        //создаем страну
+        SingleCountryRequest createCountryBody = new SingleCountryRequest();
+        createCountryBody.setName(countryName);
+        createCountryBody.setDescription(countryDescription);
+        createCountryBody.setCode(countryCode);
+        createCountryBody.setExternalCode(countryExtCode);
+
+        SingleCountryResponse createCountryResponse = given()
+                .spec(commonRequestSpec)
+                .body(createCountryBody)
+                .when()
+                .post("/entity/country/")
+                .then()
+                .spec(commonResponseSpec)
+                .extract().as(SingleCountryResponse.class);
+
+        String countryId = createCountryResponse.getId(); // получаем ID для проверки запроса GET по стране
+
+        SingleCountryResponse getCountryResponse = given()
+                .spec(commonRequestSpec)
+                .when()
+                .get("/entity/country/" + countryId)
+                .then()
+                .spec(commonResponseSpec)
+                .extract().as(SingleCountryResponse.class);
+        assertThat(getCountryResponse.getId()).isEqualTo(countryId);
+        assertThat(getCountryResponse.getName()).isEqualTo(countryName);
+        assertThat(getCountryResponse.getDescription()).isEqualTo(countryDescription);
+        assertThat(getCountryResponse.getCode()).isEqualTo(countryCode);
+        assertThat(getCountryResponse.getExternalCode()).isEqualTo(countryExtCode);
+
+        //вычищаем данные
+        deleteCountry(countryId);
+
+    }
 
 }

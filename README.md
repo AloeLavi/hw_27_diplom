@@ -21,7 +21,9 @@
 <img width="6%" title="GitHub" src="images/logo/github.png">
 <img width="6%" title="Jenkins" src="images/logo/jenkins.png">
 <img width="6%" title="Telegram" src="images/logo/telegram.png">
-<img width="6%" title="Telegram" src="images/logo/selenoid.png">
+<img width="6%" title="selenoid" src="images/logo/selenoid.png">
+<img width="6%" title="RestAssured" src="images/logo/rest_assured.png">
+
 
 </p>
 
@@ -40,8 +42,9 @@
   - Проверки сущности "Страна"
     - Создание с обязательными полями
     - Создание со всеми доступными полями
-    - Создание без обязательных полей
+    - Попытка создания без обязательных полей
     - Редактирование
+    - Удаление (проверяется косвенно во всех тестах)
 
 
 ## 	:computer: Запуск тестов из терминала

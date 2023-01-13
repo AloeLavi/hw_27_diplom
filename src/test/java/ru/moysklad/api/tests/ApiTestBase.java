@@ -2,6 +2,8 @@ package ru.moysklad.api.tests;
 
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
+import ru.moysklad.api.lombok.SingleCountryRequest;
+import ru.moysklad.api.lombok.SingleCountryResponse;
 
 import static io.restassured.RestAssured.given;
 import static ru.moysklad.api.specs.CommonSpecs.commonRequestSpec;

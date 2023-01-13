@@ -70,7 +70,7 @@ public class CountryTests extends ApiTestBase {
     }
 
     @Test
-    @DisplayName("Создание страны без обязательных полей")
+    @DisplayName("Попытка создания страны без обязательных полей")
     void createCountryWithoutRequiredFields(){
         SingleCountryRequest body = new SingleCountryRequest();
         given()

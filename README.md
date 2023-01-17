@@ -77,7 +77,7 @@ test
 > 
 > <code>remoteUrl</code> – адрес удаленного сервера, на котором будут запускаться тесты.
 
-### <img src="images/logo/jenkins.png" width="25" height="25"  alt="Allure"/></a>	Страница сборки в Jenkins
+### <img src="images/logo/jenkins.png" width="25" height="25"  alt="Allure"/></a>	Страница сборки в [Jenkins](https://jenkins.autotests.cloud/job/15-aloe_lavi-hw_27_diplom/)
 <p align="center">
 <img title="allure_main" src="images/pictures/jenkins_page.png">
 </p>
